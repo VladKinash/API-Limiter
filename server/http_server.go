@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"net/http"
+	//"github.com/VladKinash/API-Limiter/middleware"
 )
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
@@ -17,6 +18,8 @@ func loggingMiddleware(next http.Handler) http.Handler {
 }
 
 func StartServer() {
+	//var ApiLimiter = middleware.NewLimiter(15, "Limiter")
+	//var validApiKeys = []string{"APIKEY1", "APIKEY2"}
 	http.Handle("/", loggingMiddleware(http.HandlerFunc(rootHandler)))
 	http.ListenAndServe(":8080", nil)
 }
